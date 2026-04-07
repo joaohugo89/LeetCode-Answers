@@ -4,12 +4,8 @@ class Solution {
         if (x < 2) return 1;
         int ret = 0;
         int i = 0;
-        while (i <= x / 2) {
-            if ((long) i * i <= x){
-                ret = i;
-            } else {
-                break;
-            }
+        while ((long) i * i <= x) {
+            ret = i;
             i++;
         }
         return ret;
