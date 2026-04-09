@@ -12,7 +12,6 @@ class Solution {
             }
         }
 
-        // se ainda sobrou algo em nums2
         while (j >= 0) {
             nums1[k--] = nums2[j--];
         }
