@@ -1,49 +1,26 @@
-import java.util.HashSet;
-
 class Solution {
     public boolean isValidSudoku(char[][] board) {
+        boolean[][] rows = new boolean[9][9];
+        boolean[][] cols = new boolean[9][9];
+        boolean[][] boxes = new boolean[9][9];
 
         for (int i = 0; i < 9; i++) {
-            HashSet<Character> set = new HashSet<>();
-
             for (int j = 0; j < 9; j++) {
+
                 char c = board[i][j];
 
                 if (c == '.') continue;
 
-                if (set.contains(c)) return false;
-                set.add(c);
-            }
-        }
+                int num = c - '1';
+                int boxIndex = (i / 3) * 3 + (j / 3);
 
-        for (int j = 0; j < 9; j++) {
-            HashSet<Character> set = new HashSet<>();
-
-            for (int i = 0; i < 9; i++) {
-                char c = board[i][j];
-
-                if (c == '.') continue;
-
-                if (set.contains(c)) return false;
-                set.add(c);
-            }
-        }
-
-        for (int i = 0; i < 9; i += 3) {
-            for (int j = 0; j < 9; j += 3) {
-
-                HashSet<Character> set = new HashSet<>();
-
-                for (int x = 0; x < 3; x++) {
-                    for (int y = 0; y < 3; y++) {
-                        char c = board[i + x][j + y];
-
-                        if (c == '.') continue;
-
-                        if (set.contains(c)) return false;
-                        set.add(c);
-                    }
+                if (rows[i][num] || cols[j][num] || boxes[boxIndex][num]) {
+                    return false;
                 }
+
+                rows[i][num] = true;
+                cols[j][num] = true;
+                boxes[boxIndex][num] = true;
             }
         }
 
