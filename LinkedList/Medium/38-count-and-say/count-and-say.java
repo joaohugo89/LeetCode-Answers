@@ -1,29 +1,26 @@
 class Solution {
-
     public String countAndSay(int n) {
-        if (n == 1) return "1";
-        String prev = countAndSay(n - 1);
-        return build(prev);
-    }
+        String result = "1";
 
-    private String build(String s) {
-        StringBuilder result = new StringBuilder();
-        process(s, 0, result);
-        return result.toString();
-    }
+        for (int i = 2; i <= n; i++) {
+            StringBuilder next = new StringBuilder();
 
-    private void process(String s, int index, StringBuilder result) {
-        if (index >= s.length()) return;
+            int count = 1;
 
-        char current = s.charAt(index);
-        int count = 0;
+            for (int j = 1; j < result.length(); j++) {
+                if (result.charAt(j) == result.charAt(j - 1)) {
+                    count++;
+                } else {
+                    next.append(count).append(result.charAt(j - 1));
+                    count = 1;
+                }
+            }
 
-        while (index < s.length() && s.charAt(index) == current) {
-            count++;
-            index++;
+            next.append(count).append(result.charAt(result.length() - 1));
+
+            result = next.toString();
         }
 
-        result.append(count).append(current);
-        process(s, index, result);
+        return result;
     }
 }
