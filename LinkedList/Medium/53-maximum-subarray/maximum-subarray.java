@@ -4,8 +4,7 @@ class Solution {
         int currentMax = nums[0];
         
         for (int i = 1; i < nums.length; i++) {
-            int num = nums[i];
-            currentMax = Math.max(num, currentMax + num);
+            currentMax = Math.max(nums[i], currentMax + nums[i]);
             globalMax = Math.max(globalMax, currentMax);
         }
         
